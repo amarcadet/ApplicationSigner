@@ -1,0 +1,39 @@
+//
+// Prefix header for all source files of the 'ApplicationSigner' target in the 'ApplicationSigner' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
+
+#ifdef DEBUG
+/*! DLog permet d'afficher une trace améliorée dans la console
+ 
+ DLog passe des informations supplémentaires à NSLog, notamment le nom de la fonction et la ligne du fichier d'où est issu l'appel
+ Exemples d'utilisation :
+ <pre>
+ DLog();
+ DLog(@"ici");
+ DLog(@"valeur : %d", x);
+ </pre>
+ 
+ Attention :
+ <pre>
+ DLog(aStringVariable);
+ </pre>
+ 
+ Vous devez appeler à la place :
+ 
+ <pre>
+ DLog(@"%@", aStringVariable);
+ </pre>
+ */
+#	define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#	define DLog(...)
+#	define NSLog(...)
+#endif
+
+/*! ALog affiche une trace dans la console indépendamment du mode de compilation (Debug, Release ou Distribution)
+ */
+#define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
